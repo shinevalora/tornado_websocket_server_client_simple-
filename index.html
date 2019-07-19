@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>Hello Word</p>
+<div id="app"></div>
+<script type="application/javascript">
+    // es6 语法 非常像 python
+    var url = "ws://127.0.0.1:9992/ws";
+    var ws = new WebSocket(url);  // 建立连接
+    ws.onopen = function () {
+        ws.send("你好");  // 发送消息
+    };
+
+    ws.onclose = function () {
+        console.log("ws 已关闭");
+    };
+
+    ws.onmessage = function (msg) {
+        console.log("收到服务端消息:" + msg.data);
+        // js 操作dom，把内容 放在网页中
+        app = document.querySelector("#app")
+        app.innerHTML = "<p>" + msg.data + "</p>" // 字符串拼接 html
+    }
+
+
+</script>
+
+</body>
+</html>
